@@ -1,0 +1,21 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkinss
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins_network
+
+networks:
+  jenkins_network:
+    external: true  # Dış ağ kullanılıyor
+
+volumes:
+  jenkins_home:
+    driver: local
